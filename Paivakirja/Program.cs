@@ -5,7 +5,7 @@ namespace PaivakirjaOhjelma
 {
     class Program
     {
-        // Vakio ohjelman versiolle
+        // Vakio ohjelman versiolle.
         const string OHJELMAN_VERSIO = ": Beta 0.2";
 
         // Päiväkirjamerkintöjen lista
