@@ -22,7 +22,7 @@ namespace PaivakirjaOhjelma
             // Luodaan kansio, jos sitä ei ole olemassa
             LuoKansioJosTarvitaan();
 
-            // Ladataan olemassa olevat merkinnät tiedostosta ohjelman käynnistyessä
+            // Ladataan olemassa olevat merkinnät tiedostosta ohjelman käynnistyessä.
             LataaMerkinnat();
 
             while (jatka)
