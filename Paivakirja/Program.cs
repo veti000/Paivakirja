@@ -9,7 +9,7 @@ namespace PaivakirjaOhjelma
         // Vakio ohjelman versiolle
         const string OHJELMAN_VERSIO = ": Beta 0.2";
 
-        // Tiedoston nimi ja sijainti
+        // Tiedoston nimi ja sijainti.
         const string TIEDOSTON_NIMI = @"C:\Kansio\paivakirja.txt";
 
         // Päiväkirjamerkintöjen lista
