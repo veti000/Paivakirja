@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace PaivakirjaOhjelma
 {
@@ -8,12 +9,21 @@ namespace PaivakirjaOhjelma
         // Vakio ohjelman versiolle
         const string OHJELMAN_VERSIO = ": Beta 0.2";
 
+        // Tiedoston nimi ja sijainti
+        const string TIEDOSTON_NIMI = @"C:\Kansio\paivakirja.txt";
+
         // Päiväkirjamerkintöjen lista
         static List<string> paivakirjaMerkinnat = new List<string>();
 
         static void Main(string[] args)
         {
             bool jatka = true;
+
+            // Luodaan kansio, jos sitä ei ole olemassa
+            LuoKansioJosTarvitaan();
+
+            // Ladataan olemassa olevat merkinnät tiedostosta ohjelman käynnistyessä
+            LataaMerkinnat();
 
             while (jatka)
             {
@@ -56,6 +66,9 @@ namespace PaivakirjaOhjelma
                     Console.ReadKey();
                 }
             }
+
+            // Tallennetaan merkinnät tiedostoon ohjelman lopettaessa
+            TallennaMerkinnat();
 
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Kiitos käytöstä! Ohjelma päättyy.");
@@ -121,6 +134,9 @@ namespace PaivakirjaOhjelma
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("\nMerkintä lisätty!");
+
+                // Tallennetaan merkinnät tiedostoon heti lisäyksen jälkeen
+                TallennaMerkinnat();
             }
             else
             {
@@ -173,6 +189,9 @@ namespace PaivakirjaOhjelma
 
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("\nMerkintä poistettu!");
+
+                    // Tallennetaan merkinnät tiedostoon poiston jälkeen
+                    TallennaMerkinnat();
                 }
                 else
                 {
@@ -186,6 +205,61 @@ namespace PaivakirjaOhjelma
                 Console.WriteLine("\nVirheellinen syöte, anna numero.");
             }
             Console.ResetColor();
+        }
+
+        // Metodi tallentaa merkinnät tiedostoon
+        static void TallennaMerkinnat()
+        {
+            try
+            {
+                File.WriteAllLines(TIEDOSTON_NIMI, paivakirjaMerkinnat);
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Virhe tallennettaessa tiedostoon: {ex.Message}");
+                Console.ResetColor();
+            }
+        }
+
+        // Metodi lataa merkinnät tiedostosta ohjelman käynnistyessä
+        static void LataaMerkinnat()
+        {
+            try
+            {
+                if (File.Exists(TIEDOSTON_NIMI))
+                {
+                    paivakirjaMerkinnat.AddRange(File.ReadAllLines(TIEDOSTON_NIMI));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Virhe ladattaessa tiedostoa: {ex.Message}");
+                Console.ResetColor();
+            }
+        }
+
+        // Metodi luo tarvittavan kansion, jos sitä ei ole olemassa
+        static void LuoKansioJosTarvitaan()
+        {
+            try
+            {
+                // Haetaan kansio tiedostopolusta
+                string kansioPolku = Path.GetDirectoryName(TIEDOSTON_NIMI);
+
+                // Luodaan kansio, jos sitä ei ole
+                if (!Directory.Exists(kansioPolku))
+                {
+                    Directory.CreateDirectory(kansioPolku);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Virhe kansion luomisessa: {ex.Message}");
+                Console.ResetColor();
+            }
         }
     }
 }
