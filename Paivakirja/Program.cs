@@ -19,7 +19,7 @@ namespace PaivakirjaOhjelma
         {
             bool jatka = true;
 
-            // Luodaan kansio, jos sitä ei ole olemassa
+            // Luodaan kansio, jos sitä ei ole olemassa.
             LuoKansioJosTarvitaan();
 
             // Ladataan olemassa olevat merkinnät tiedostosta ohjelman käynnistyessä.
