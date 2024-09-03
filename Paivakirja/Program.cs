@@ -23,7 +23,7 @@ namespace PaivakirjaOhjelma
                 NaytaValikko();
 
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.Write("Valitse toiminto (1-4): ");  // Päivitetty valinta
+                Console.Write("Valitse toiminto (1-4): ");  // Päivitetty valinta.
                 Console.ResetColor();
 
                 string valinta = Console.ReadLine();
