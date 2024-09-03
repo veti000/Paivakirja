@@ -8,7 +8,7 @@ namespace PaivakirjaOhjelma
         // Vakio ohjelman versiolle.
         const string OHJELMAN_VERSIO = ": Beta 0.2";
 
-        // Päiväkirjamerkintöjen lista
+        // Päiväkirjamerkintöjen lista.
         static List<string> paivakirjaMerkinnat = new List<string>();
 
         static void Main(string[] args)
